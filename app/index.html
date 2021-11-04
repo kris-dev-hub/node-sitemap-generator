@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sitemap generator</title>
+<!--    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> -->
+    <link href="../public/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="../public/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-light">
+
+    <div class="container">
+        <main>
+            <form class="needs-validation" id="url_form" novalidate>
+                <div class="py-5 text-center">
+                    <h2>Sitemap generator</h2>
+                </div>
+
+                <div class="row g-3">
+
+                    <div class="col-12">
+                        <label for="url" class="form-label">Url</label>
+                        <input type="text" class="form-control" id="url" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Please enter website url.
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="page_limit" class="form-label">Page limit</label>
+                        <select class="form-select" id="page_limit" required>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="5000">5000</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select scanning limit in one run
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="sleep_time" class="form-label">Sleep time [ms]</label>
+                        <select class="form-select" id="sleep_time" required>
+                            <option value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="3000">3000</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select sleep time in ms
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit" id="sitemap_submit">Start scanning</button>
+            </form>
+    </main>
+
+
+        <div class="py-5 text-center">
+            <h2 id="h2message"></h2>
+        </div>
+
+    </div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        const ipcRenderer = require('electron').ipcRenderer;
+        var form = document.querySelector('#url_form')
+
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            } else {
+
+                ipcRenderer.send("btnclick",document.getElementById('url').value,document.getElementById('page_limit').value,document.getElementById('sleep_time').value);
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+
+    })()
+
+</script>
+
+</body>
+</html>
