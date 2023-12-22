@@ -16,7 +16,7 @@
   "dependencies": {
     "puppeteer-chromium-resolver": "^7.0.0",
     "robots-parser": "^2.2.0",
-    "sqlite3": "5.0.0"
+    "sqlite3": "5.1.5"
   },
   "devDependencies": {
     "electron": "^11.3.0",
