@@ -9,12 +9,13 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false
     }
   })
 
   mainWindow.loadFile('./app/index.html');
-//  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
 }
 
@@ -33,6 +34,11 @@ app.on('activate', () => {
 })
 
 //start scanning button
-ipcMain.on("btnclick",async (event,url,page_limit,sleep_time) => {
-  sitemapGenerator.generateSitemap(mainWindow,url,page_limit,sleep_time);
+ipcMain.on("btnclick",async (event,url,pageLimit,sleepTime) => {
+  try {
+    await sitemapGenerator.generateSitemap(mainWindow,url, pageLimit, sleepTime);
+  } catch (error) {
+    event.sender.send('error', error.message);
+  }
+//  sitemapGenerator.generateSitemap(mainWindow,url,pageLimit,sleepTime);
 });

@@ -61,7 +61,7 @@ async function generateSitemap(mainWindow,url,page_limit,sleep_time) {
     });
 
     //start the browser
-    let browserInstance = browserObject.startBrowser();
+    let browserInstance = browserObject.startBrowser(true,false);
     //build first opened tab page instance
     let pageInstance = pageObject.openPage(browserInstance, 0);
 

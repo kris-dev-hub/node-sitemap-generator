@@ -14,12 +14,12 @@
     "sitemap.xml"
   ],
   "dependencies": {
-    "puppeteer-chromium-resolver": "^7.0.0",
-    "robots-parser": "^2.2.0",
-    "sqlite3": "5.1.5"
+    "puppeteer-chromium-resolver": "^21.0.0",
+    "robots-parser": "^3.0.1",
+    "sqlite3": "5.1.6"
   },
   "devDependencies": {
-    "electron": "^22.3.25",
+    "electron": "^28.1.0",
     "electron-packager": "^17.1.2"
   },
   "build": {

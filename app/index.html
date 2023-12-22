@@ -75,12 +75,16 @@
         const ipcRenderer = require('electron').ipcRenderer;
         var form = document.querySelector('#url_form')
 
+        ipcRenderer.on('error', (event, message) => {
+            // Display the error message in the form
+            document.querySelector('.invalid-feedback').textContent = message;
+        });
+
         form.addEventListener('submit', function (event) {
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()
             } else {
-
                 ipcRenderer.send("btnclick",document.getElementById('url').value,document.getElementById('page_limit').value,document.getElementById('sleep_time').value);
                 event.preventDefault()
                 event.stopPropagation()
